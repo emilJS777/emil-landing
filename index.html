@@ -1,1103 +1,1382 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Emil | Web3 Backend & Wallet Engineer</title>
-    <meta name="description" content="Web3 backend, wallet infrastructure, custody, CEX/DEX integrations, blockchain scanners and transaction systems." />
+    <meta charset="UTF-8">
 
-    <style>
-        :root {
-            --bg: #060912;
-            --bg-soft: #0b1020;
-            --card: rgba(13, 20, 39, 0.72);
-            --card-strong: rgba(17, 27, 54, 0.9);
-            --line: rgba(95, 139, 255, 0.22);
-            --line-strong: rgba(111, 96, 255, 0.55);
-            --text: #f4f7ff;
-            --muted: #9eabc7;
-            --muted-2: #6f7d9b;
-            --blue: #00c8ff;
-            --purple: #b45cff;
-            --green: #30ffb1;
-            --warning: #ffcc66;
-            --shadow: 0 24px 80px rgba(0, 0, 0, 0.45);
-            --radius: 26px;
-            --max: 1180px;
-        }
+    <meta
+            name="viewport"
+            content="width=device-width, initial-scale=1.0"
+    >
 
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-        }
+    <title>
+        Emil Hambardzumyan | Lead Fullstack & Blockchain Engineer
+    </title>
 
-        html {
-            scroll-behavior: smooth;
-        }
+    <meta
+            name="description"
+            content="Lead Fullstack and Blockchain Engineer specializing in multi-chain custody, wallet infrastructure, trading platforms, backend architecture and production Web3 systems."
+    >
 
-        body {
-            min-height: 100vh;
-            font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-            color: var(--text);
-            background:
-                    radial-gradient(circle at 18% 12%, rgba(0, 200, 255, 0.18), transparent 28%),
-                    radial-gradient(circle at 82% 16%, rgba(180, 92, 255, 0.2), transparent 30%),
-                    radial-gradient(circle at 52% 80%, rgba(0, 200, 255, 0.08), transparent 36%),
-                    var(--bg);
-            overflow-x: hidden;
-        }
+    <meta
+            name="keywords"
+            content="Emil Hambardzumyan, Blockchain Engineer, Fullstack Developer, Backend Engineer, Blockchain Architect, Web3 Developer, FastAPI, Vue.js, Custody Platform, Wallet Infrastructure"
+    >
 
-        body::before {
-            content: "";
-            position: fixed;
-            inset: 0;
-            pointer-events: none;
-            background-image:
-                    linear-gradient(rgba(255,255,255,0.025) 1px, transparent 1px),
-                    linear-gradient(90deg, rgba(255,255,255,0.025) 1px, transparent 1px);
-            background-size: 48px 48px;
-            mask-image: linear-gradient(to bottom, rgba(0,0,0,0.75), transparent 85%);
-            z-index: -2;
-        }
+    <meta name="author" content="Emil Hambardzumyan">
 
-        body::after {
-            content: "";
-            position: fixed;
-            inset: 0;
-            pointer-events: none;
-            background: linear-gradient(120deg, transparent, rgba(0, 200, 255, 0.04), transparent, rgba(180, 92, 255, 0.035), transparent);
-            z-index: -1;
-        }
+    <meta property="og:type" content="website">
 
-        a {
-            color: inherit;
-            text-decoration: none;
-        }
+    <meta
+            property="og:title"
+            content="Emil Hambardzumyan | Lead Fullstack & Blockchain Engineer"
+    >
 
-        .container {
-            width: min(var(--max), calc(100% - 40px));
-            margin: 0 auto;
-        }
+    <meta
+            property="og:description"
+            content="Building secure blockchain infrastructure, custody systems, trading platforms and production-ready Web3 products."
+    >
 
-        .nav {
-            position: sticky;
-            top: 0;
-            z-index: 20;
-            backdrop-filter: blur(18px);
-            background: rgba(6, 9, 18, 0.74);
-            border-bottom: 1px solid rgba(255,255,255,0.06);
-        }
+    <meta property="og:image" content="assets/images/emil-profile.jpg">
 
-        .nav-inner {
-            height: 76px;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            gap: 24px;
-        }
+    <meta name="theme-color" content="#020813">
 
-        .brand {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            font-weight: 800;
-            letter-spacing: -0.02em;
-        }
-
-        .brand-mark {
-            width: 42px;
-            height: 42px;
-            border-radius: 14px;
-            display: grid;
-            place-items: center;
-            background: linear-gradient(135deg, rgba(0, 200, 255, 0.18), rgba(180, 92, 255, 0.2));
-            border: 1px solid rgba(255,255,255,0.13);
-            box-shadow: 0 0 34px rgba(0, 200, 255, 0.18);
-            color: var(--blue);
-        }
-
-        .brand small {
-            display: block;
-            color: var(--muted);
-            font-size: 12px;
-            font-weight: 600;
-            letter-spacing: 0.08em;
-            text-transform: uppercase;
-            margin-top: 1px;
-        }
-
-        .nav-links {
-            display: flex;
-            align-items: center;
-            gap: 20px;
-            color: var(--muted);
-            font-size: 14px;
-        }
-
-        .nav-links a:hover {
-            color: var(--text);
-        }
-
-        .btn {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            gap: 10px;
-            min-height: 46px;
-            padding: 0 18px;
-            border-radius: 999px;
-            border: 1px solid rgba(255,255,255,0.11);
-            background: rgba(255,255,255,0.045);
-            color: var(--text);
-            font-weight: 750;
-            font-size: 14px;
-            transition: 0.2s ease;
-            cursor: pointer;
-        }
-
-        .btn:hover {
-            transform: translateY(-2px);
-            border-color: rgba(0, 200, 255, 0.55);
-            box-shadow: 0 14px 34px rgba(0, 200, 255, 0.12);
-        }
-
-        .btn-primary {
-            background: linear-gradient(135deg, var(--blue), var(--purple));
-            border-color: transparent;
-            color: white;
-            box-shadow: 0 18px 45px rgba(86, 113, 255, 0.26);
-        }
-
-        .btn svg {
-            width: 18px;
-            height: 18px;
-            flex: 0 0 auto;
-        }
-
-        .hero {
-            position: relative;
-            padding: 92px 0 54px;
-        }
-
-        .hero-grid {
-            display: grid;
-            grid-template-columns: 1.05fr 0.95fr;
-            gap: 44px;
-            align-items: center;
-        }
-
-        .eyebrow {
-            display: inline-flex;
-            align-items: center;
-            gap: 10px;
-            padding: 8px 12px;
-            border-radius: 999px;
-            background: rgba(0, 200, 255, 0.08);
-            border: 1px solid rgba(0, 200, 255, 0.22);
-            color: #b8efff;
-            font-size: 13px;
-            font-weight: 750;
-            letter-spacing: 0.04em;
-            text-transform: uppercase;
-            margin-bottom: 24px;
-        }
-
-        .dot {
-            width: 8px;
-            height: 8px;
-            border-radius: 50%;
-            background: var(--green);
-            box-shadow: 0 0 18px var(--green);
-        }
-
-        h1 {
-            font-size: clamp(44px, 7vw, 82px);
-            line-height: 0.96;
-            letter-spacing: -0.07em;
-            max-width: 760px;
-        }
-
-        .gradient-text {
-            background: linear-gradient(90deg, #fff, var(--blue), var(--purple));
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
-        }
-
-        .lead {
-            margin-top: 24px;
-            color: var(--muted);
-            font-size: clamp(17px, 2vw, 21px);
-            line-height: 1.7;
-            max-width: 680px;
-        }
-
-        .hero-actions {
-            margin-top: 34px;
-            display: flex;
-            flex-wrap: wrap;
-            gap: 14px;
-        }
-
-        .hero-stats {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 12px;
-            margin-top: 34px;
-            max-width: 640px;
-        }
-
-        .stat {
-            padding: 18px;
-            border-radius: 20px;
-            background: rgba(255,255,255,0.045);
-            border: 1px solid rgba(255,255,255,0.08);
-        }
-
-        .stat b {
-            display: block;
-            font-size: 24px;
-            letter-spacing: -0.04em;
-        }
-
-        .stat span {
-            display: block;
-            color: var(--muted);
-            margin-top: 4px;
-            font-size: 13px;
-        }
-
-        .visual-card {
-            position: relative;
-            min-height: 520px;
-            border-radius: 34px;
-            padding: 28px;
-            background:
-                    linear-gradient(150deg, rgba(255,255,255,0.1), rgba(255,255,255,0.035)),
-                    rgba(8, 13, 28, 0.84);
-            border: 1px solid rgba(255,255,255,0.1);
-            box-shadow: var(--shadow);
-            overflow: hidden;
-        }
-
-        .visual-card::before {
-            content: "";
-            position: absolute;
-            width: 430px;
-            height: 430px;
-            border-radius: 50%;
-            right: -120px;
-            top: -90px;
-            background: radial-gradient(circle, rgba(180,92,255,0.28), transparent 62%);
-        }
-
-        .visual-card::after {
-            content: "";
-            position: absolute;
-            inset: 0;
-            background-image: radial-gradient(rgba(0,200,255,0.24) 1px, transparent 1px);
-            background-size: 22px 22px;
-            opacity: 0.15;
-            mask-image: linear-gradient(120deg, transparent, black, transparent);
-        }
-
-        .terminal {
-            position: relative;
-            z-index: 2;
-            border-radius: 24px;
-            background: rgba(5, 10, 22, 0.72);
-            border: 1px solid rgba(0,200,255,0.18);
-            overflow: hidden;
-        }
-
-        .terminal-head {
-            height: 46px;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            padding: 0 16px;
-            border-bottom: 1px solid rgba(255,255,255,0.08);
-            color: var(--muted-2);
-            font-size: 13px;
-        }
-
-        .circle {
-            width: 10px;
-            height: 10px;
-            border-radius: 50%;
-            background: rgba(255,255,255,0.28);
-        }
-
-        .code {
-            padding: 22px;
-            color: #cde7ff;
-            font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
-            line-height: 1.9;
-            font-size: 14px;
-            min-height: 245px;
-        }
-
-        .code .p { color: var(--purple); }
-        .code .b { color: var(--blue); }
-        .code .g { color: var(--green); }
-        .code .m { color: var(--muted); }
-
-        .orbit {
-            position: relative;
-            z-index: 2;
-            margin-top: 20px;
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 12px;
-        }
-
-        .chip-card {
-            padding: 16px;
-            min-height: 92px;
-            border-radius: 20px;
-            background: rgba(255,255,255,0.05);
-            border: 1px solid rgba(255,255,255,0.08);
-        }
-
-        .chip-card strong {
-            display: block;
-            font-size: 15px;
-            margin-bottom: 7px;
-        }
-
-        .chip-card span {
-            color: var(--muted);
-            font-size: 13px;
-            line-height: 1.5;
-        }
-
-        .section {
-            padding: 62px 0;
-        }
-
-        .section-head {
-            display: flex;
-            justify-content: space-between;
-            align-items: end;
-            gap: 24px;
-            margin-bottom: 28px;
-        }
-
-        .section-kicker {
-            color: var(--blue);
-            text-transform: uppercase;
-            letter-spacing: 0.12em;
-            font-size: 13px;
-            font-weight: 800;
-            margin-bottom: 10px;
-        }
-
-        h2 {
-            font-size: clamp(31px, 4vw, 52px);
-            line-height: 1.05;
-            letter-spacing: -0.055em;
-            max-width: 720px;
-        }
-
-        .section-note {
-            color: var(--muted);
-            line-height: 1.7;
-            max-width: 440px;
-        }
-
-        .cards {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 16px;
-        }
-
-        .card {
-            position: relative;
-            min-height: 240px;
-            padding: 24px;
-            border-radius: var(--radius);
-            background: var(--card);
-            border: 1px solid rgba(255,255,255,0.085);
-            box-shadow: 0 18px 50px rgba(0,0,0,0.22);
-            overflow: hidden;
-            transition: 0.2s ease;
-        }
-
-        .card:hover {
-            transform: translateY(-5px);
-            border-color: rgba(0,200,255,0.32);
-        }
-
-        .card::after {
-            content: "";
-            position: absolute;
-            inset: auto -70px -90px auto;
-            width: 170px;
-            height: 170px;
-            border-radius: 50%;
-            background: radial-gradient(circle, rgba(0,200,255,0.16), transparent 65%);
-        }
-
-        .icon {
-            width: 48px;
-            height: 48px;
-            display: grid;
-            place-items: center;
-            border-radius: 16px;
-            background: linear-gradient(135deg, rgba(0,200,255,0.14), rgba(180,92,255,0.18));
-            border: 1px solid rgba(255,255,255,0.1);
-            margin-bottom: 18px;
-            font-size: 22px;
-        }
-
-        .card h3 {
-            font-size: 20px;
-            margin-bottom: 12px;
-            letter-spacing: -0.03em;
-        }
-
-        .card p {
-            color: var(--muted);
-            line-height: 1.65;
-            font-size: 15px;
-        }
-
-        .split {
-            display: grid;
-            grid-template-columns: 0.9fr 1.1fr;
-            gap: 18px;
-        }
-
-        .panel {
-            border-radius: 30px;
-            background: var(--card-strong);
-            border: 1px solid rgba(255,255,255,0.085);
-            padding: 28px;
-            box-shadow: var(--shadow);
-        }
-
-        .panel h3 {
-            font-size: 25px;
-            letter-spacing: -0.04em;
-            margin-bottom: 14px;
-        }
-
-        .panel p {
-            color: var(--muted);
-            line-height: 1.72;
-        }
-
-        .list {
-            display: grid;
-            gap: 12px;
-            margin-top: 20px;
-        }
-
-        .list-item {
-            display: flex;
-            gap: 12px;
-            align-items: flex-start;
-            padding: 14px;
-            border-radius: 18px;
-            background: rgba(255,255,255,0.045);
-            border: 1px solid rgba(255,255,255,0.07);
-            color: var(--muted);
-            line-height: 1.55;
-        }
-
-        .check {
-            flex: 0 0 auto;
-            width: 22px;
-            height: 22px;
-            border-radius: 8px;
-            display: grid;
-            place-items: center;
-            background: rgba(48,255,177,0.1);
-            color: var(--green);
-            border: 1px solid rgba(48,255,177,0.22);
-            font-size: 13px;
-            margin-top: 1px;
-        }
-
-        .projects {
-            display: grid;
-            grid-template-columns: 1fr 1fr 1fr;
-            gap: 16px;
-        }
-
-        .project {
-            padding: 26px;
-            border-radius: 30px;
-            min-height: 310px;
-            background:
-                    linear-gradient(145deg, rgba(0,200,255,0.08), rgba(180,92,255,0.055)),
-                    rgba(13, 20, 39, 0.78);
-            border: 1px solid rgba(255,255,255,0.09);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .project::before {
-            content: "";
-            position: absolute;
-            inset: 0;
-            background: linear-gradient(90deg, rgba(255,255,255,0.08), transparent 35%);
-            opacity: 0.4;
-            pointer-events: none;
-        }
-
-        .tag {
-            display: inline-flex;
-            align-items: center;
-            height: 30px;
-            padding: 0 11px;
-            border-radius: 999px;
-            background: rgba(0,200,255,0.08);
-            border: 1px solid rgba(0,200,255,0.18);
-            color: #bff3ff;
-            font-size: 12px;
-            font-weight: 800;
-            text-transform: uppercase;
-            letter-spacing: 0.08em;
-            margin-bottom: 18px;
-        }
-
-        .project h3 {
-            font-size: 25px;
-            letter-spacing: -0.04em;
-            margin-bottom: 12px;
-        }
-
-        .project p {
-            color: var(--muted);
-            line-height: 1.7;
-            margin-bottom: 18px;
-        }
-
-        .mini-list {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 8px;
-            margin-top: auto;
-        }
-
-        .mini-list span {
-            display: inline-flex;
-            align-items: center;
-            min-height: 30px;
-            padding: 0 10px;
-            border-radius: 999px;
-            background: rgba(255,255,255,0.055);
-            border: 1px solid rgba(255,255,255,0.075);
-            color: var(--muted);
-            font-size: 12px;
-            font-weight: 700;
-        }
-
-        .stack-grid {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 14px;
-        }
-
-        .stack-box {
-            padding: 22px;
-            border-radius: 24px;
-            background: rgba(255,255,255,0.045);
-            border: 1px solid rgba(255,255,255,0.08);
-        }
-
-        .stack-box h3 {
-            font-size: 16px;
-            margin-bottom: 14px;
-            color: #dbe7ff;
-        }
-
-        .stack-box ul {
-            list-style: none;
-            display: grid;
-            gap: 10px;
-            color: var(--muted);
-            font-size: 14px;
-        }
-
-        .stack-box li::before {
-            content: "•";
-            color: var(--blue);
-            margin-right: 8px;
-        }
-
-        .cta {
-            padding: 44px;
-            border-radius: 36px;
-            background:
-                    radial-gradient(circle at 18% 0%, rgba(0,200,255,0.18), transparent 34%),
-                    radial-gradient(circle at 82% 0%, rgba(180,92,255,0.18), transparent 34%),
-                    rgba(12, 18, 35, 0.9);
-            border: 1px solid rgba(255,255,255,0.1);
-            box-shadow: var(--shadow);
-            display: grid;
-            grid-template-columns: 1fr auto;
-            gap: 24px;
-            align-items: center;
-        }
-
-        .cta h2 {
-            max-width: 790px;
-        }
-
-        .contact-grid {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 12px;
-            margin-top: 22px;
-        }
-
-        footer {
-            padding: 32px 0 46px;
-            color: var(--muted-2);
-            font-size: 14px;
-        }
-
-        .footer-inner {
-            display: flex;
-            justify-content: space-between;
-            gap: 20px;
-            border-top: 1px solid rgba(255,255,255,0.08);
-            padding-top: 24px;
-        }
-
-        @media (max-width: 980px) {
-            .hero-grid,
-            .split,
-            .cta {
-                grid-template-columns: 1fr;
-            }
-
-            .visual-card {
-                min-height: auto;
-            }
-
-            .cards,
-            .projects,
-            .stack-grid {
-                grid-template-columns: repeat(2, 1fr);
-            }
-
-            .section-head {
-                align-items: flex-start;
-                flex-direction: column;
-            }
-
-            .nav-links {
-                display: none;
-            }
-        }
-
-        @media (max-width: 640px) {
-            .container {
-                width: min(100% - 28px, var(--max));
-            }
-
-            .hero {
-                padding-top: 62px;
-            }
-
-            .hero-stats,
-            .cards,
-            .projects,
-            .stack-grid,
-            .orbit {
-                grid-template-columns: 1fr;
-            }
-
-            .hero-actions .btn,
-            .contact-grid .btn {
-                width: 100%;
-            }
-
-            .card,
-            .project,
-            .panel,
-            .cta {
-                border-radius: 24px;
-                padding: 22px;
-            }
-
-            h1 {
-                font-size: 42px;
-            }
-
-            .footer-inner {
-                flex-direction: column;
-            }
-        }
-
-        .profile-badge {
-            position: relative;
-            z-index: 3;
-            display: flex;
-            align-items: center;
-            gap: 14px;
-            margin-bottom: 18px;
-            padding: 14px;
-            border-radius: 22px;
-            background: rgba(255,255,255,0.055);
-            border: 1px solid rgba(255,255,255,0.09);
-            box-shadow: 0 18px 45px rgba(0, 200, 255, 0.08);
-        }
-
-        .profile-photo {
-            width: 68px;
-            height: 68px;
-            border-radius: 20px;
-            object-fit: cover;
-            border: 1px solid rgba(0,200,255,0.45);
-            box-shadow: 0 0 28px rgba(0,200,255,0.22);
-        }
-
-        .profile-badge strong {
-            display: block;
-            font-size: 17px;
-            letter-spacing: -0.03em;
-        }
-
-        .profile-badge span {
-            display: block;
-            margin-top: 4px;
-            color: var(--muted);
-            font-size: 13px;
-        }
-    </style>
+    <link
+            rel="stylesheet"
+            href="assets/css/style.css"
+    >
 </head>
-<body>
-<nav class="nav">
-    <div class="container nav-inner">
-        <a href="#top" class="brand" aria-label="Home">
-<!--            <span class="brand-mark">⌁</span>-->
-            <span>
-          Emil Hambardzumyan
-          <small>Web3 Backend Engineer</small>
-        </span>
-        </a>
-        <div class="nav-links">
-            <a href="#services">Services</a>
-            <a href="#projects">Projects</a>
-            <a href="#stack">Stack</a>
-            <a href="#contact">Contact</a>
-        </div>
-        <a class="btn btn-primary" href="mailto:emil301992@gmail.com">Let’s talk</a>
-    </div>
-</nav>
 
-<main id="top">
+<body>
+
+<a class="skip-link" href="#main-content">
+    Skip to content
+</a>
+
+
+<!-- ======================================================
+     HEADER
+     ====================================================== -->
+
+<header class="site-header">
+    <div class="container header-inner">
+
+        <a
+                class="brand"
+                href="index.html"
+                aria-label="Emil Hambardzumyan home"
+        >
+<!--            <span class="brand-mark" aria-hidden="true">-->
+<!--                EH-->
+<!--            </span>-->
+
+            <span class="brand-text">
+                <strong>Emil Hambardzumyan</strong>
+                <small>Fullstack & Blockchain Engineer</small>
+            </span>
+        </a>
+
+
+        <nav
+                class="desktop-nav"
+                aria-label="Main navigation"
+        >
+            <a
+                    class="nav-link active"
+                    href="index.html"
+                    aria-current="page"
+            >
+                Home
+            </a>
+
+            <a
+                    class="nav-link"
+                    href="experience.html"
+            >
+                Experience
+            </a>
+
+            <a
+                    class="nav-link"
+                    href="projects.html"
+            >
+                Projects
+            </a>
+
+            <a
+                    class="nav-link"
+                    href="resume.html"
+            >
+                Resume
+            </a>
+
+            <a
+                    class="nav-link"
+                    href="contact.html"
+            >
+                Contact
+            </a>
+        </nav>
+
+
+        <div class="header-actions">
+            <a
+                    class="button button-primary button-small"
+                    href="mailto:emil301992@gmail.com"
+            >
+                Let’s talk
+            </a>
+
+            <button
+                    class="mobile-menu-button"
+                    type="button"
+                    aria-label="Open navigation menu"
+                    aria-expanded="false"
+                    aria-controls="mobile-navigation"
+                    data-menu-button
+            >
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+
+    </div>
+
+
+    <nav
+            class="mobile-nav"
+            id="mobile-navigation"
+            aria-label="Mobile navigation"
+            data-mobile-menu
+    >
+        <a
+                class="nav-link active"
+                href="index.html"
+                aria-current="page"
+        >
+            Home
+        </a>
+
+        <a class="nav-link" href="experience.html">
+            Experience
+        </a>
+
+        <a class="nav-link" href="projects.html">
+            Projects
+        </a>
+
+        <a class="nav-link" href="resume.html">
+            Resume
+        </a>
+
+        <a class="nav-link" href="contact.html">
+            Contact
+        </a>
+
+        <a
+                class="button button-primary"
+                href="mailto:emil301992@gmail.com"
+        >
+            Contact me
+        </a>
+    </nav>
+</header>
+
+
+<!-- ======================================================
+     MAIN CONTENT
+     ====================================================== -->
+
+<main class="page-main" id="main-content">
+
+
+    <!-- ==================================================
+         HERO
+         ================================================== -->
+
     <section class="hero">
         <div class="container hero-grid">
-            <div>
-                <div class="eyebrow"><span class="dot"></span> Open to work & collaborations</div>
-                <h1>
-                    I build <span class="gradient-text">Web3 backend</span>, wallet & crypto infrastructure.
+
+            <div class="hero-copy">
+
+                <div class="eyebrow" data-reveal>
+                    <span class="eyebrow-dot"></span>
+                    Open to remote opportunities
+                </div>
+
+
+                <h1 data-reveal data-delay="1">
+                    I architect and build
+                    <span class="text-gradient">
+                        production-grade blockchain systems.
+                    </span>
                 </h1>
-                <p class="lead">
-                    Fullstack/backend blockchain integration engineer focused on multi-chain wallets,
-                    custody systems, CEX/DEX flows, transaction processing, scanners, APIs and reliable infrastructure.
+
+
+                <p
+                        class="lead"
+                        data-reveal
+                        data-delay="2"
+                >
+                    Lead Fullstack and Blockchain Engineer focused on
+                    multi-chain custody, wallet infrastructure, secure
+                    transaction processing, trading platforms and scalable
+                    backend architecture.
                 </p>
 
-                <div class="hero-actions">
-                    <a class="btn btn-primary" href="mailto:emil301992@gmail.com">Contact me</a>
-                    <a class="btn" href="https://x.com/emilbackend" target="_blank" rel="noopener">X / Twitter</a>
-                    <a class="btn" href="#projects">View work</a>
+
+                <div
+                        class="actions"
+                        data-reveal
+                        data-delay="3"
+                >
+                    <a
+                            class="button button-primary"
+                            href="projects.html"
+                    >
+                        Explore my projects
+
+                        <svg
+                                class="button-icon"
+                                viewBox="0 0 24 24"
+                                fill="none"
+                                stroke="currentColor"
+                                stroke-width="2"
+                                aria-hidden="true"
+                        >
+                            <path d="M5 12h14"></path>
+                            <path d="m13 6 6 6-6 6"></path>
+                        </svg>
+                    </a>
+
+                    <a
+                            class="button"
+                            href="resume.html"
+                    >
+                        View full resume
+                    </a>
+
+                    <a
+                            class="button"
+                            href="mailto:emil301992@gmail.com"
+                    >
+                        Contact me
+                    </a>
                 </div>
 
-                <div class="hero-stats" aria-label="Experience highlights">
-                    <div class="stat">
-                        <b>EVM · TRON · TON · BTC</b>
-                        <span>Multi-chain experience</span>
-                    </div>
-                    <div class="stat">
-                        <b>Wallets & custody</b>
-                        <span>Core infrastructure</span>
-                    </div>
-                    <div class="stat">
-                        <b>CEX / DEX</b>
-                        <span>Crypto product flows</span>
-                    </div>
+
+                <div
+                        class="hero-status"
+                        data-reveal
+                        data-delay="4"
+                >
+                    <span class="status-pill">
+                        <strong>Location:</strong>
+                        Yerevan, Armenia
+                    </span>
+
+                    <span class="status-pill">
+                        <strong>Format:</strong>
+                        Remote worldwide
+                    </span>
+
+                    <span class="status-pill">
+                        <strong>Focus:</strong>
+                        Senior / Lead / Architect
+                    </span>
                 </div>
+
             </div>
 
-            <aside class="visual-card" aria-label="Infrastructure preview">
-                <div class="profile-badge">
-                    <img class="profile-photo" src="https://media.licdn.com/dms/image/v2/D4D03AQHZQvfJPHjQ_g/profile-displayphoto-crop_800_800/B4DZ2SIdOuK0AM-/0/1776273187906?e=1779926400&v=beta&t=NTHuOG-fZSqxQFeCqIMU87iXNew68Cp1mlDY53_W0QY" alt="Emil Hambardzumyan" />
+
+            <aside
+                    class="hero-visual"
+                    aria-label="Engineering profile overview"
+                    data-reveal
+                    data-delay="2"
+            >
+
+                <div class="profile-card">
+
+                    <img
+                            class="profile-photo"
+                            src="https://i.imgur.com/8O1ppQ5.png"
+                            alt="Emil Hambardzumyan"
+                    >
+
                     <div>
-                        <strong>Emil Hambardzumyan</strong>
-                        <span>Web3 Backend & Wallet Engineer</span>
+                        <h3>Emil Hambardzumyan</h3>
+
+                        <p>
+                            Lead Fullstack & Blockchain Engineer<br>
+                            Blockchain Solutions Architect
+                        </p>
                     </div>
-                </div>
-                <div class="terminal">
-                    <div class="terminal-head">
-                        <span class="circle"></span><span class="circle"></span><span class="circle"></span>
-                        <span>infrastructure.pipeline</span>
-                    </div>
-                    <div class="code">
-                        <span class="p">class</span> <span class="b">CryptoInfrastructure</span>:<br />
-                        &nbsp;&nbsp;<span class="p">def</span> <span class="g">build</span>(self):<br />
-                        &nbsp;&nbsp;&nbsp;&nbsp;wallets = <span class="b">multi_chain</span>(EVM, TRON, TON, BTC)<br />
-                        &nbsp;&nbsp;&nbsp;&nbsp;tx = <span class="b">process_transactions</span>(reliable=True)<br />
-                        &nbsp;&nbsp;&nbsp;&nbsp;events = <span class="b">scan_blocks</span>(async_mode=True)<br />
-                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="p">return</span> <span class="g">production_ready_system</span>
-                    </div>
+
                 </div>
 
-                <div class="orbit">
-                    <div class="chip-card">
-                        <strong>Wallet engineering</strong>
-                        <span>Address creation, balances, signing flows, withdrawals, deposit tracking.</span>
+
+                <div class="terminal-card">
+
+                    <div class="terminal-header">
+                        <span class="terminal-dot"></span>
+                        <span class="terminal-dot"></span>
+                        <span class="terminal-dot"></span>
+
+                        <span class="terminal-title">
+                            engineering.profile
+                        </span>
                     </div>
-                    <div class="chip-card">
-                        <strong>Backend systems</strong>
-                        <span>APIs, workers, queues, DB consistency, real-time communication.</span>
+
+
+                    <div class="terminal-code">
+                        <span class="code-blue">class</span>
+                        <span class="code-cyan">BlockchainEngineer</span>:<br>
+
+                        &nbsp;&nbsp;role =
+                        <span class="code-green">
+                            "Lead Fullstack / Architect"
+                        </span><br>
+
+                        &nbsp;&nbsp;backend = [
+                        <span class="code-cyan">
+                            "Python", "FastAPI", ".NET"
+                        </span>
+                        ]<br>
+
+                        &nbsp;&nbsp;frontend = [
+                        <span class="code-cyan">
+                            "Vue.js", "JavaScript"
+                        </span>
+                        ]<br>
+
+                        &nbsp;&nbsp;chains = [
+                        <span class="code-cyan">
+                            "BTC", "EVM", "TRON", "TON", "SOL"
+                        </span>
+                        ]<br>
+
+                        &nbsp;&nbsp;systems = [
+                        <span class="code-cyan">
+                            "Custody", "Wallets", "Trading"
+                        </span>
+                        ]<br><br>
+
+                        &nbsp;&nbsp;<span class="code-blue">def</span>
+                        <span class="code-green">deliver</span>(self):<br>
+
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="code-blue">return</span>
+                        <span class="code-green">
+                            "architecture_to_production"
+                        </span>
                     </div>
-                    <div class="chip-card">
-                        <strong>Blockchain scanners</strong>
-                        <span>Block/event processing, confirmations, idempotency, webhooks.</span>
-                    </div>
-                    <div class="chip-card">
-                        <strong>Product integration</strong>
-                        <span>DEX wallets, CEX-like flows, swaps, admin dashboards.</span>
-                    </div>
+
                 </div>
+
+
+                <div class="stats-grid">
+
+                    <div class="stat-card">
+                        <span class="stat-number">5+</span>
+
+                        <span class="stat-label">
+                            Blockchain ecosystems integrated
+                        </span>
+                    </div>
+
+
+                    <div class="stat-card">
+                        <span class="stat-number">3</span>
+
+                        <span class="stat-label">
+                            Major DENeon product directions
+                        </span>
+                    </div>
+
+
+                    <div class="stat-card">
+                        <span class="stat-number">E2E</span>
+
+                        <span class="stat-label">
+                            Architecture, development and deployment
+                        </span>
+                    </div>
+
+                </div>
+
             </aside>
+
         </div>
     </section>
 
-    <section class="section" id="services">
+
+    <!-- ==================================================
+         SPECIALIZATION
+         ================================================== -->
+
+    <section class="section section-divider">
         <div class="container">
-            <div class="section-head">
-                <div>
-                    <div class="section-kicker">What I can build</div>
-                    <h2>Backend-first Web3 systems with practical fullstack delivery.</h2>
+
+            <div class="section-header">
+
+                <div
+                        class="section-header-content"
+                        data-reveal
+                >
+                    <div class="section-kicker">
+                        Engineering specialization
+                    </div>
+
+                    <h2>
+                        Backend-first engineering with complete
+                        product delivery.
+                    </h2>
                 </div>
-                <p class="section-note">
-                    I focus on the hard parts behind crypto products: transactions, wallets, scanners,
-                    consistency, APIs and infrastructure that keeps working after launch.
+
+
+                <p
+                        class="section-description"
+                        data-reveal
+                        data-delay="1"
+                >
+                    I work across architecture, backend, frontend and
+                    infrastructure, with particular depth in financial and
+                    blockchain transaction systems.
                 </p>
+
             </div>
 
-            <div class="cards">
-                <article class="card">
-                    <div class="icon">🔐</div>
-                    <h3>Wallet & custody infrastructure</h3>
-                    <p>Multi-chain wallet flows, deposits, withdrawals, balances, admin tools, roles, permissions and secure transaction handling.</p>
+
+            <div class="grid-four">
+
+                <article
+                        class="card"
+                        data-reveal
+                >
+                    <div class="card-icon" aria-hidden="true">
+                        ◈
+                    </div>
+
+                    <h3>
+                        Blockchain Infrastructure
+                    </h3>
+
+                    <p>
+                        Multi-chain wallet systems, custody architecture,
+                        blockchain scanners, transaction signing and
+                        network-specific integrations.
+                    </p>
                 </article>
 
-                <article class="card">
-                    <div class="icon">⚡</div>
-                    <h3>Transaction systems</h3>
-                    <p>Reliable transaction pipelines with retries, status tracking, confirmations, idempotency and operational visibility.</p>
+
+                <article
+                        class="card"
+                        data-reveal
+                        data-delay="1"
+                >
+                    <div class="card-icon" aria-hidden="true">
+                        ⌘
+                    </div>
+
+                    <h3>
+                        Backend Architecture
+                    </h3>
+
+                    <p>
+                        API-first services, asynchronous processing,
+                        real-time communication, data consistency and
+                        secure financial workflows.
+                    </p>
                 </article>
 
-                <article class="card">
-                    <div class="icon">🛰️</div>
-                    <h3>Blockchain scanners</h3>
-                    <p>Async scanners for blockchains, event processing, deposits detection, webhook delivery and data synchronization.</p>
+
+                <article
+                        class="card"
+                        data-reveal
+                        data-delay="2"
+                >
+                    <div class="card-icon" aria-hidden="true">
+                        ⇄
+                    </div>
+
+                    <h3>
+                        Trading Platforms
+                    </h3>
+
+                    <p>
+                        Market data, exchange integrations, swaps,
+                        order workflows, corporate wallets and
+                        transaction execution services.
+                    </p>
                 </article>
 
-                <article class="card">
-                    <div class="icon">⇄</div>
-                    <h3>CEX / DEX integrations</h3>
-                    <p>Exchange-like flows, swaps, wallet connections, order/transaction tracking and crypto product backend integration.</p>
+
+                <article
+                        class="card"
+                        data-reveal
+                        data-delay="3"
+                >
+                    <div class="card-icon" aria-hidden="true">
+                        ◫
+                    </div>
+
+                    <h3>
+                        Fullstack Delivery
+                    </h3>
+
+                    <p>
+                        Vue.js interfaces, admin systems, backend APIs,
+                        Docker deployments and complete products delivered
+                        from concept to production.
+                    </p>
                 </article>
+
             </div>
+
         </div>
     </section>
+
+
+    <!-- ==================================================
+         POSITIONING
+         ================================================== -->
 
     <section class="section">
-        <div class="container split">
-            <div class="panel">
-                <div class="section-kicker">Positioning</div>
-                <h3>Backend engineer who understands the crypto product layer.</h3>
+        <div class="container grid-two">
+
+            <article
+                    class="panel"
+                    data-reveal
+            >
+                <div class="section-kicker">
+                    Professional positioning
+                </div>
+
+                <h3>
+                    More than a standard Fullstack Developer.
+                </h3>
+
                 <p>
-                    I am not only connecting smart contracts or APIs. I design the backend logic around
-                    real product needs: user balances, transaction states, blockchain confirmations,
-                    admin operations, error recovery and user-facing flows.
+                    My work combines backend engineering, product architecture,
+                    blockchain infrastructure and practical frontend delivery.
+                    I design the systems behind the product: wallets, balances,
+                    approvals, transactions, scanners, APIs, webhooks and
+                    operational workflows.
                 </p>
-            </div>
 
-            <div class="panel">
-                <h3>Problems I usually solve</h3>
-                <div class="list">
-                    <div class="list-item"><span class="check">✓</span> Teams need wallet, deposit, withdrawal or custody logic but do not want to build everything from scratch.</div>
-                    <div class="list-item"><span class="check">✓</span> Existing Web3 integration works in demo mode but fails under real transaction edge cases.</div>
-                    <div class="list-item"><span class="check">✓</span> Product needs scanners, webhooks, workers and reliable status synchronization across chains.</div>
-                    <div class="list-item"><span class="check">✓</span> A frontend exists, but the backend architecture, APIs, and crypto flows need production-grade implementation.</div>
+
+                <div class="tags" style="margin-top: 22px;">
+                    <span class="tag tag-cyan">
+                        System Architecture
+                    </span>
+
+                    <span class="tag tag-cyan">
+                        Product Ownership
+                    </span>
+
+                    <span class="tag tag-cyan">
+                        Secure Transactions
+                    </span>
+
+                    <span class="tag tag-cyan">
+                        Production Delivery
+                    </span>
                 </div>
-            </div>
+            </article>
+
+
+            <article
+                    class="panel"
+                    data-reveal
+                    data-delay="1"
+            >
+                <div class="section-kicker">
+                    Core engineering value
+                </div>
+
+                <h3>
+                    I turn complex blockchain requirements into usable systems.
+                </h3>
+
+
+                <div class="feature-list">
+
+                    <div class="feature-item">
+                        <span class="feature-check">✓</span>
+
+                        <span>
+                            Translate product and business requirements
+                            into secure technical architecture.
+                        </span>
+                    </div>
+
+
+                    <div class="feature-item">
+                        <span class="feature-check">✓</span>
+
+                        <span>
+                            Design systems around real transaction states,
+                            confirmations, failures and recovery flows.
+                        </span>
+                    </div>
+
+
+                    <div class="feature-item">
+                        <span class="feature-check">✓</span>
+
+                        <span>
+                            Build backend, frontend and infrastructure
+                            without losing consistency between layers.
+                        </span>
+                    </div>
+
+
+                    <div class="feature-item">
+                        <span class="feature-check">✓</span>
+
+                        <span>
+                            Deliver complete products from early concept
+                            through deployment and production iteration.
+                        </span>
+                    </div>
+
+                </div>
+            </article>
+
         </div>
     </section>
 
-    <section class="section" id="projects">
+
+    <!-- ==================================================
+         SELECTED ACHIEVEMENTS
+         ================================================== -->
+
+    <section class="section section-divider">
         <div class="container">
-            <div class="section-head">
-                <div>
-                    <div class="section-kicker">Selected work</div>
-                    <h2>Systems and products I can speak about from real experience.</h2>
-                </div>
-            </div>
 
-            <div class="projects">
-                <article class="project">
-                    <span class="tag">Current project</span>
-                    <h3>DENeon</h3>
-                    <p>Wallet + GameFi system with crypto flows, multi-chain direction, product UX, backend APIs and user-facing Web3 functionality.</p>
-                    <div class="mini-list">
-                        <span>Wallet</span><span>GameFi</span><span>Backend APIs</span><span>Web3 UX</span>
+            <div class="section-header">
+
+                <div
+                        class="section-header-content"
+                        data-reveal
+                >
+                    <div class="section-kicker">
+                        Selected engineering achievements
                     </div>
-                </article>
 
-                <article class="project">
-                    <span class="tag">Infrastructure</span>
-                    <h3>Multi-chain custody</h3>
-                    <p>Custody-oriented backend logic for wallets, balances, deposits, withdrawals, transaction status tracking and operational dashboards.</p>
-                    <div class="mini-list">
-                        <span>EVM</span><span>TRON</span><span>TON</span><span>BTC</span><span>SOL</span><span>More</span><span>Workers</span>
-                    </div>
-                </article>
-
-                <article class="project">
-                    <span class="tag">Automation</span>
-                    <h3>Scanners & transaction pipelines</h3>
-                    <p>Blockchain scanners and async processing services for events, confirmations, consistency and integration with product backends.</p>
-                    <div class="mini-list">
-                        <span>Async</span><span>Redis</span><span>Webhooks</span><span>Events</span><span>Monitoring</span>
-                    </div>
-                </article>
-            </div>
-        </div>
-    </section>
-
-    <section class="section" id="stack">
-        <div class="container">
-            <div class="section-head">
-                <div>
-                    <div class="section-kicker">Tech stack</div>
-                    <h2>Backend-heavy stack with enough frontend to ship complete flows.</h2>
+                    <h2>
+                        Architecture and systems built from real
+                        product requirements.
+                    </h2>
                 </div>
+
+
+                <p
+                        class="section-description"
+                        data-reveal
+                        data-delay="1"
+                >
+                    Highlights from products involving blockchain custody,
+                    wallets, real-time applications and trading infrastructure.
+                </p>
+
             </div>
 
-            <div class="stack-grid">
-                <div class="stack-box">
-                    <h3>Backend</h3>
-                    <ul>
-                        <li>Python / FastAPI / Flask</li>
-                        <li>C# / .NET Core / ASP.NET Core</li>
-                        <li>REST APIs / MVC projects</li>
-                        <li>Workers / background jobs</li>
-                    </ul>
-                </div>
 
-                <div class="stack-box">
-                    <h3>Data & realtime</h3>
-                    <ul>
-                        <li>Databases</li>
-                        <li>Redis</li>
-                        <li>EF Core / SQLAlchemy</li>
-                        <li>SignalR / WebSockets</li>
-                    </ul>
-                </div>
+            <div class="grid-two">
 
-                <div class="stack-box">
-                    <h3>Blockchain</h3>
-                    <ul>
-                        <li>EVM / Web3</li>
-                        <li>TRON</li>
-                        <li>TON</li>
-                        <li>Bitcoin / UTXO flows</li>
-                    </ul>
-                </div>
+                <article
+                        class="panel panel-hover"
+                        data-reveal
+                >
+                    <h3>
+                        Multi-chain custody architecture
+                    </h3>
 
-                <div class="stack-box">
-                    <h3>Frontend delivery</h3>
-                    <ul>
-                        <li>JavaScript</li>
-                        <li>Vue.js</li>
-                        <li>Admin dashboards</li>
-                        <li>Wallet UX integration</li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section class="section" id="contact">
-        <div class="container">
-            <div class="cta">
-                <div>
-                    <div class="section-kicker">Available for selected work</div>
-                    <h2>Building a crypto product, wallet, exchange flow or Web3 backend?</h2>
-                    <p class="lead">
-                        Send me a short description of your product, current stage and the backend/Web3 problem you need to solve.
+                    <p>
+                        Designed a B2B custody platform with custodial and
+                        non-custodial wallets, transaction execution,
+                        blockchain scanners, workspaces and API-based
+                        integrations.
                     </p>
-                    <div class="contact-grid">
-                        <a class="btn btn-primary" href="mailto:emil301992@gmail.com" aria-label="Email Emil">
-                            <svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                <rect x="3" y="5" width="18" height="14" rx="3"></rect>
-                                <path d="m3.5 7 8.5 6 8.5-6"></path>
-                            </svg>
-                            emil301992@gmail.com
-                        </a>
-                        <a class="btn" href="https://x.com/emilbackend" target="_blank" rel="noopener" aria-label="X profile">
-                            <svg viewBox="0 0 24 24" aria-hidden="true" fill="currentColor">
-                                <path d="M18.244 2H21.5l-7.11 8.124L22.75 22h-6.54l-5.12-6.69L5.235 22H1.98l7.604-8.692L1.56 2h6.706l4.626 6.116L18.244 2Zm-1.143 17.91h1.804L7.285 3.98H5.35l11.75 15.93Z"></path>
-                            </svg>
-                            @emilbackend
-                        </a>
-                        <a class="btn" href="https://www.linkedin.com/in/emil-hambardzumyan-989519235" target="_blank" rel="noopener" aria-label="LinkedIn profile">
-                            <svg viewBox="0 0 24 24" aria-hidden="true" fill="currentColor">
-                                <path d="M4.98 3.5C4.98 4.88 3.86 6 2.5 6S0 4.88 0 3.5 1.12 1 2.5 1s2.48 1.12 2.48 2.5ZM.28 8h4.44v15H.28V8Zm7.4 0h4.25v2.05h.06c.59-1.12 2.04-2.3 4.2-2.3 4.49 0 5.32 2.96 5.32 6.8V23h-4.43v-7.5c0-1.79-.03-4.1-2.5-4.1-2.5 0-2.88 1.95-2.88 3.96V23H7.68V8Z"></path>
-                            </svg>
-                            LinkedIn
-                        </a>
-                        <a class="btn" href="#top">Back to top</a>
+
+                    <div class="tags" style="margin-top: 20px;">
+                        <span class="tag">Bitcoin</span>
+                        <span class="tag">EVM</span>
+                        <span class="tag">TRON</span>
+                        <span class="tag">TON</span>
+                        <span class="tag">Solana</span>
                     </div>
-                </div>
-<!--                <div class="brand-mark" style="width:96px;height:96px;border-radius:28px;font-size:38px;">D</div>-->
+                </article>
+
+
+                <article
+                        class="panel panel-hover"
+                        data-reveal
+                        data-delay="1"
+                >
+                    <h3>
+                        Secure transaction approvals
+                    </h3>
+
+                    <p>
+                        Implemented configurable multi-approval workflows
+                        with distinct approvers, initiator restrictions,
+                        transaction thresholds and controlled execution.
+                    </p>
+
+                    <div class="tags" style="margin-top: 20px;">
+                        <span class="tag">Authorization</span>
+                        <span class="tag">Policy Engine</span>
+                        <span class="tag">Auditability</span>
+                    </div>
+                </article>
+
+
+                <article
+                        class="panel panel-hover"
+                        data-reveal
+                        data-delay="2"
+                >
+                    <h3>
+                        Event-driven blockchain processing
+                    </h3>
+
+                    <p>
+                        Built scanner and webhook flows for transaction
+                        confirmations, balance changes, transaction events
+                        and real-time updates across product interfaces.
+                    </p>
+
+                    <div class="tags" style="margin-top: 20px;">
+                        <span class="tag">Scanners</span>
+                        <span class="tag">Webhooks</span>
+                        <span class="tag">WebSockets</span>
+                        <span class="tag">Redis</span>
+                    </div>
+                </article>
+
+
+                <article
+                        class="panel panel-hover"
+                        data-reveal
+                        data-delay="3"
+                >
+                    <h3>
+                        Product-to-production delivery
+                    </h3>
+
+                    <p>
+                        Delivered backend services, Vue.js applications,
+                        database models, integrations and deployments using
+                        Docker, Kubernetes and production web infrastructure.
+                    </p>
+
+                    <div class="tags" style="margin-top: 20px;">
+                        <span class="tag">FastAPI</span>
+                        <span class="tag">Vue.js</span>
+                        <span class="tag">Docker</span>
+                        <span class="tag">Kubernetes</span>
+                    </div>
+                </article>
+
             </div>
+
         </div>
     </section>
+
+
+    <!-- ==================================================
+         FEATURED PROJECTS
+         ================================================== -->
+
+    <section class="section">
+        <div class="container">
+
+            <div class="section-header">
+
+                <div
+                        class="section-header-content"
+                        data-reveal
+                >
+                    <div class="section-kicker">
+                        Featured projects
+                    </div>
+
+                    <h2>
+                        Products that demonstrate my engineering scope.
+                    </h2>
+                </div>
+
+
+                <div
+                        class="actions"
+                        data-reveal
+                        data-delay="1"
+                >
+                    <a
+                            class="button"
+                            href="projects.html"
+                    >
+                        View all projects
+                    </a>
+                </div>
+
+            </div>
+
+
+            <div class="grid-three">
+
+                <article
+                        class="project-card"
+                        data-reveal
+                >
+                    <div class="project-meta">
+                        <span class="tag tag-green">
+                            Flagship product
+                        </span>
+
+                        <span class="text-muted">
+                            2025 — Present
+                        </span>
+                    </div>
+
+                    <h3>
+                        DENeon Ecosystem
+                    </h3>
+
+                    <p>
+                        A connected blockchain ecosystem combining enterprise
+                        custody infrastructure, wallet services, DEX
+                        functionality and a Telegram GameFi product.
+                    </p>
+
+                    <div class="tags">
+                        <span class="tag">Custody</span>
+                        <span class="tag">DEX</span>
+                        <span class="tag">GameFi</span>
+                        <span class="tag">Wallets</span>
+                        <span class="tag">Webhooks</span>
+                    </div>
+
+                    <a
+                            class="project-link"
+                            href="projects.html#deneon"
+                    >
+                        Explore DENeon
+                        <span aria-hidden="true">→</span>
+                    </a>
+                </article>
+
+
+                <article
+                        class="project-card"
+                        data-reveal
+                        data-delay="1"
+                >
+                    <div class="project-meta">
+                        <span class="tag tag-cyan">
+                            Trading infrastructure
+                        </span>
+
+                        <span class="text-muted">
+                            2026
+                        </span>
+                    </div>
+
+                    <h3>
+                        StockySpace & StockyEngine
+                    </h3>
+
+                    <p>
+                        A trading product and execution engine integrating
+                        market data, corporate wallet management, Solana
+                        transactions and Jupiter swap routing.
+                    </p>
+
+                    <div class="tags">
+                        <span class="tag">ASP.NET Core</span>
+                        <span class="tag">FastAPI</span>
+                        <span class="tag">Vue.js</span>
+                        <span class="tag">Solana</span>
+                        <span class="tag">Jupiter</span>
+                    </div>
+
+                    <a
+                            class="project-link"
+                            href="projects.html#stockyspace"
+                    >
+                        Explore StockySpace
+                        <span aria-hidden="true">→</span>
+                    </a>
+                </article>
+
+
+                <article
+                        class="project-card"
+                        data-reveal
+                        data-delay="2"
+                >
+                    <div class="project-meta">
+                        <span class="tag">
+                            Algorithmic trading
+                        </span>
+
+                        <span class="text-muted">
+                            2026
+                        </span>
+                    </div>
+
+                    <h3>
+                        ArbiNator
+                    </h3>
+
+                    <p>
+                        Multi-exchange cryptocurrency trading infrastructure
+                        with market data processing, strategy configuration,
+                        risk controls and execution workflows.
+                    </p>
+
+                    <div class="tags">
+                        <span class="tag">Python</span>
+                        <span class="tag">CCXT</span>
+                        <span class="tag">Exchange APIs</span>
+                        <span class="tag">Risk Logic</span>
+                    </div>
+
+                    <a
+                            class="project-link"
+                            href="projects.html#arbinator"
+                    >
+                        Explore ArbiNator
+                        <span aria-hidden="true">→</span>
+                    </a>
+                </article>
+
+            </div>
+
+        </div>
+    </section>
+
+
+    <!-- ==================================================
+         EXPERIENCE PREVIEW
+         ================================================== -->
+
+    <section class="section section-divider">
+        <div class="container">
+
+            <div class="section-header">
+
+                <div
+                        class="section-header-content"
+                        data-reveal
+                >
+                    <div class="section-kicker">
+                        Professional experience
+                    </div>
+
+                    <h2>
+                        Commercial engineering and independent product work.
+                    </h2>
+                </div>
+
+
+                <div
+                        class="actions"
+                        data-reveal
+                        data-delay="1"
+                >
+                    <a
+                            class="button"
+                            href="experience.html"
+                    >
+                        Full experience
+                    </a>
+                </div>
+
+            </div>
+
+
+            <div class="timeline">
+
+                <article
+                        class="timeline-item"
+                        data-reveal
+                >
+                    <span class="timeline-dot"></span>
+
+                    <div class="timeline-card">
+
+                        <div class="timeline-header">
+
+                            <div>
+                                <h3>
+                                    Founder & Lead Fullstack Blockchain Engineer
+                                </h3>
+
+                                <div class="timeline-company">
+                                    DENeon
+                                </div>
+                            </div>
+
+                            <div class="timeline-date">
+                                Nov 2025 — Present
+                            </div>
+
+                        </div>
+
+                        <p class="timeline-description">
+                            Leading architecture and development of a
+                            multi-product blockchain ecosystem covering
+                            custody, wallets, DEX infrastructure and GameFi.
+                        </p>
+
+                        <div class="tags">
+                            <span class="tag">Architecture</span>
+                            <span class="tag">FastAPI</span>
+                            <span class="tag">Vue.js</span>
+                            <span class="tag">Blockchain</span>
+                            <span class="tag">Kubernetes</span>
+                        </div>
+
+                    </div>
+                </article>
+
+
+                <article
+                        class="timeline-item"
+                        data-reveal
+                        data-delay="1"
+                >
+                    <span class="timeline-dot"></span>
+
+                    <div class="timeline-card">
+
+                        <div class="timeline-header">
+
+                            <div>
+                                <h3>
+                                    Backend & Blockchain Developer
+                                </h3>
+
+                                <div class="timeline-company">
+                                    FreedX
+                                </div>
+                            </div>
+
+                            <div class="timeline-date">
+                                Apr 2024 — Mar 2026
+                            </div>
+
+                        </div>
+
+                        <p class="timeline-description">
+                            Worked on backend and blockchain systems for a
+                            cryptocurrency exchange environment, including
+                            APIs, integrations and financial platform logic.
+                        </p>
+
+                        <div class="tags">
+                            <span class="tag">Python</span>
+                            <span class="tag">Backend</span>
+                            <span class="tag">Blockchain</span>
+                            <span class="tag">Exchange Systems</span>
+                        </div>
+
+                    </div>
+                </article>
+
+
+                <article
+                        class="timeline-item"
+                        data-reveal
+                        data-delay="2"
+                >
+                    <span class="timeline-dot"></span>
+
+                    <div class="timeline-card">
+
+                        <div class="timeline-header">
+
+                            <div>
+                                <h3>
+                                    Fullstack Developer
+                                </h3>
+
+                                <div class="timeline-company">
+                                    HopShop
+                                </div>
+                            </div>
+
+                            <div class="timeline-date">
+                                May 2022 — Feb 2024
+                            </div>
+
+                        </div>
+
+                        <p class="timeline-description">
+                            Developed and maintained fullstack web product
+                            functionality across backend APIs, frontend
+                            interfaces, databases and production support.
+                        </p>
+
+                        <div class="tags">
+                            <span class="tag">Python</span>
+                            <span class="tag">Flask</span>
+                            <span class="tag">Vue.js</span>
+                            <span class="tag">Databases</span>
+                        </div>
+
+                    </div>
+                </article>
+
+            </div>
+
+        </div>
+    </section>
+
+
+    <!-- ==================================================
+         TECHNOLOGY STACK
+         ================================================== -->
+
+    <section class="section">
+        <div class="container">
+
+            <div class="section-header">
+
+                <div
+                        class="section-header-content"
+                        data-reveal
+                >
+                    <div class="section-kicker">
+                        Technology stack
+                    </div>
+
+                    <h2>
+                        Technologies selected around real product needs.
+                    </h2>
+                </div>
+
+            </div>
+
+
+            <div class="grid-four">
+
+                <article
+                        class="card"
+                        data-reveal
+                >
+                    <div class="card-icon">
+                        { }
+                    </div>
+
+                    <h3>
+                        Backend
+                    </h3>
+
+                    <div class="tags">
+                        <span class="tag">Python</span>
+                        <span class="tag">FastAPI</span>
+                        <span class="tag">Flask</span>
+                        <span class="tag">C#</span>
+                        <span class="tag">ASP.NET Core</span>
+                        <span class="tag">SQLAlchemy</span>
+                        <span class="tag">EF Core</span>
+                    </div>
+                </article>
+
+
+                <article
+                        class="card"
+                        data-reveal
+                        data-delay="1"
+                >
+                    <div class="card-icon">
+                        ◇
+                    </div>
+
+                    <h3>
+                        Blockchain
+                    </h3>
+
+                    <div class="tags">
+                        <span class="tag">Bitcoin</span>
+                        <span class="tag">Ethereum</span>
+                        <span class="tag">EVM</span>
+                        <span class="tag">TRON</span>
+                        <span class="tag">TON</span>
+                        <span class="tag">Solana</span>
+                        <span class="tag">WalletConnect</span>
+                    </div>
+                </article>
+
+
+                <article
+                        class="card"
+                        data-reveal
+                        data-delay="2"
+                >
+                    <div class="card-icon">
+                        ◫
+                    </div>
+
+                    <h3>
+                        Frontend
+                    </h3>
+
+                    <div class="tags">
+                        <span class="tag">Vue.js</span>
+                        <span class="tag">JavaScript</span>
+                        <span class="tag">Pinia</span>
+                        <span class="tag">Vite</span>
+                        <span class="tag">HTML</span>
+                        <span class="tag">CSS</span>
+                    </div>
+                </article>
+
+
+                <article
+                        class="card"
+                        data-reveal
+                        data-delay="3"
+                >
+                    <div class="card-icon">
+                        ⬡
+                    </div>
+
+                    <h3>
+                        Infrastructure
+                    </h3>
+
+                    <div class="tags">
+                        <span class="tag">Docker</span>
+                        <span class="tag">Kubernetes</span>
+                        <span class="tag">Redis</span>
+                        <span class="tag">MySQL</span>
+                        <span class="tag">PostgreSQL</span>
+                        <span class="tag">Nginx</span>
+                        <span class="tag">Linux</span>
+                    </div>
+                </article>
+
+            </div>
+
+        </div>
+    </section>
+
+
+    <!-- ==================================================
+         CTA
+         ================================================== -->
+
+    <section class="section section-small">
+        <div class="container">
+
+            <div
+                    class="cta-panel"
+                    data-reveal
+            >
+
+                <div class="cta-content">
+
+                    <div class="section-kicker">
+                        Open to strong opportunities
+                    </div>
+
+                    <h2>
+                        Need an engineer who can own both architecture
+                        and implementation?
+                    </h2>
+
+                    <p>
+                        I am open to Senior, Lead, Architect and Founding
+                        Engineer opportunities in blockchain, fintech,
+                        backend infrastructure and fullstack product development.
+                    </p>
+
+                </div>
+
+
+                <div class="actions">
+
+                    <a
+                            class="button button-primary"
+                            href="mailto:emil301992@gmail.com"
+                    >
+                        Email me
+                    </a>
+
+                    <a
+                            class="button"
+                            href="contact.html"
+                    >
+                        Contact details
+                    </a>
+
+                </div>
+
+            </div>
+
+        </div>
+    </section>
+
 </main>
 
-<footer>
+
+<!-- ======================================================
+     FOOTER
+     ====================================================== -->
+
+<footer class="site-footer">
     <div class="container footer-inner">
-        <span>© <span id="year"></span> Emil. Web3 backend & wallet infrastructure.</span>
-<!--        <span>Built as a single-file HTML/CSS/JS landing.</span>-->
+
+        <p class="footer-copy">
+            © <span data-current-year></span>
+            Emil Hambardzumyan.
+            Lead Fullstack & Blockchain Engineer.
+        </p>
+
+
+        <nav
+                class="footer-links"
+                aria-label="Social links"
+        >
+            <a
+                    href="mailto:emil301992@gmail.com"
+            >
+                Email
+            </a>
+
+            <a
+                    href="https://www.linkedin.com/in/emil-hambardzumyan-989519235"
+                    target="_blank"
+                    rel="noopener noreferrer"
+            >
+                LinkedIn
+            </a>
+
+            <a
+                    href="https://x.com/emilbackend"
+                    target="_blank"
+                    rel="noopener noreferrer"
+            >
+                X / Twitter
+            </a>
+
+            <a
+                    href="resume.html"
+            >
+                Resume
+            </a>
+        </nav>
+
     </div>
 </footer>
 
-<script>
-    document.getElementById('year').textContent = new Date().getFullYear();
 
-    const cards = document.querySelectorAll('.card, .project, .panel, .stack-box');
-    const observer = new IntersectionObserver((entries) => {
-        entries.forEach((entry) => {
-            if (entry.isIntersecting) {
-                entry.target.animate([
-                    { opacity: 0, transform: 'translateY(18px)' },
-                    { opacity: 1, transform: 'translateY(0)' }
-                ], {
-                    duration: 520,
-                    easing: 'cubic-bezier(.2,.8,.2,1)',
-                    fill: 'forwards'
-                });
-                observer.unobserve(entry.target);
-            }
-        });
-    }, { threshold: 0.12 });
+<script src="assets/js/main.js"></script>
 
-    cards.forEach((el) => {
-        el.style.opacity = '0';
-        observer.observe(el);
-    });
-</script>
 </body>
 </html>
