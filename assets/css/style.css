@@ -2564,7 +2564,7 @@ button:disabled {
 
 .project-overview-grid {
     align-items: stretch;
-    padding-left: 140px; padding-right: 140px;
+    width: min(var(--container), calc(100% - 40px)); margin-inline: auto;
 }
 
 .project-overview-card {
